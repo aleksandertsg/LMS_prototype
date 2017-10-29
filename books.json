@@ -1,0 +1,40 @@
+{
+  "result": [
+    {
+      "id": 1,
+      "title": "title1",
+      "ISBN": "1233112",
+      "status": "available"
+    },
+    {
+      "id": 2,
+      "title": "book2",
+      "ISBN": "12312512",
+      "status": "available"
+    },
+    {
+      "id": 3,
+      "title": "KALEVIPOEG",
+      "ISBN": "1231212",
+      "status": "available"
+    },
+    {
+      "id": 4,
+      "title": "something else",
+      "ISBN": "1231122",
+      "status": "available"
+    },
+    {
+      "id": 5,
+      "title": "Hamlet",
+      "ISBN": "12745212",
+      "status": "available"
+    },
+    {
+      "id": 6,
+      "title": "evil by design",
+      "ISBN": "12334612",
+      "status": "available"
+    }
+  ]
+}

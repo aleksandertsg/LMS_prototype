@@ -1,0 +1,25 @@
+{
+  "result": [
+    {
+      "title": "title1",
+      "status": "available",
+      "id": 1,
+      "ISBN": "1233112"
+    },
+    {
+      "title": "book2",
+      "status": "available",
+      "id": 2,
+      "ISBN": "12312512",
+      "blockedBy": "blocker"
+    },
+    {
+      "title": "issuedBook",
+      "status": "issued",
+      "id": 3,
+      "ISBN": "123125132",
+      "issuedTo": "someUser",
+      "issuedUntil": "2017-11-05"
+    }
+  ]
+}
