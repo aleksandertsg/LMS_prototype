@@ -31,9 +31,8 @@ defmodule Lms do
                                         true -> Map.put(x, "blockedBy", user)
                                         _ -> x
                                         end end)
-    completeTask(books, result)
+    completeTask(books, result, sys)
   end
-
 
   def unblockBook(bookId, sys \\ "books.json") do
     books = bookList(sys)
@@ -41,7 +40,7 @@ defmodule Lms do
                                         true -> Map.delete(x, "blockedBy")
                                         _    -> x
                                         end end)
-    completeTask(books, result)
+    completeTask(books, result, sys)
   end
 
   def issueBook(bookId, user, sys \\ "books.json") do
@@ -53,7 +52,7 @@ defmodule Lms do
                                                   |> Map.put("status", "issued")
                                           _    -> x
                                         end end)
-    completeTask(books, result)
+    completeTask(books, result, sys)
   end
 
   def returnBook(bookId, user, sys \\ "books.json") do
@@ -65,16 +64,15 @@ defmodule Lms do
                                                   |> Map.put("status", "available")
                                           _    -> x
                                         end end)
-    completeTask(books, result)
+    completeTask(books, result, sys)
   end
-  
 
-  def completeTask(initial, result) do
+  def completeTask(initial, result, sys \\ "books.json") do
     if (result == initial) do
       "No changes"
     else
       result = Poison.encode!(%{"result": result})
-      #File.write!("books.json", result)
+      File.write!(sys, result)
       Poison.decode!(result)
     end
   end
@@ -86,18 +84,18 @@ defmodule Lms do
   def addBook(isbn, title, sys \\ "books.json") do
     books = bookList(sys)
     if (isbn == "" || title == "") do
-      completeTask(books, books)
+      completeTask(books, books, sys)
     else
       lastId = books |> Enum.map(fn(x) -> x["id"] end) |> Enum.max
       newBooks = [%{"ISBN": isbn, "title": title, "status": "available", id: lastId + 1 } | books]
-      completeTask(books, newBooks)
+      completeTask(books, newBooks, sys)
     end
   end
 
   def removeBook(bookId, sys \\ "books.json") do
     books = bookList(sys)
     result = books |> Enum.filter(fn(x) -> x["id"] != bookId end)
-    completeTask(books, result)
+    completeTask(books, result, sys)
   end
 
 end
